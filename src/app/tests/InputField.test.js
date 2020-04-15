@@ -6,10 +6,19 @@ import InputField from '../InputField';
  
 
 describe('Testing Input FIeld', () => {
-  it('should  render correctly', () => {    
-    const props = { };
 
-      const wrapper = shallow(<InputField props />);
+  
+function callbackFn(e){
+    console.log(e);
+}
+  it('should  render correctly', () => {    
+    const props = {
+        name:"input",
+        type:"text",
+        callback:callbackFn
+    };
+
+      const wrapper = shallow(<InputField name="item" value="" callback={(e) => console.log(e) } type="number"  />);
       expect(wrapper).toMatchSnapshot();
   });
 })
