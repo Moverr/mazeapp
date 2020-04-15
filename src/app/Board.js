@@ -9,27 +9,32 @@ class Board extends Component {
         this.state = {
             numberOfColumns: 0,
             numberOfRows: 0,
-            board: null
+            board: null,
+            count:0
         }
     }
     
-    renderRow(numberOfRows, numberOfColumns) {
+    addup(_count){
+        console.log("------------------")
+     console.log(_count);    
+    }
+    renderRow(numberOfRows, numberOfColumns,middleIndex) {
         let x = numberOfRows
-        return Array.from({ length: x }, (v, k) => k + 1).map((number) => <Row key={number}  id={number} columns={numberOfColumns} />);
+        return Array.from({ length: x }, (v, k) => k + 1).map((number) => <Row key={number}  id={number} columns={numberOfColumns} middleIndex ={middleIndex} count={this.state.count} callback={this.addup}/>);
     }
     initPlay() {
-        let middleIndex = this.getMiddleArray(this.state.numberOfRows,this.state.numberOfColumns)
-        let result = this.renderRow(this.state.numberOfRows, this.state.numberOfColumns);
+        let middleIndex = this.getPossibleMiddleCell(this.state.numberOfRows,this.state.numberOfColumns)
+        let result = this.renderRow(this.state.numberOfRows, this.state.numberOfColumns,middleIndex);
         this.setState({ board: result })
         //todo: place the perosno randomly :
      
 
     }
 
-    getMiddleArray(rows,columns){
+    getPossibleMiddleCell(rows,columns){
         let result = 0;
         if(rows !== undefined && columns !== undefined){
-            result = Math.floor((rows * columns) /2 ) -1;
+            result = Math.floor((rows * columns) /2 ) ;
         }
         console.log(result);
         return result
