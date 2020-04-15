@@ -48,3 +48,14 @@ ol, ul {
 .game-info {
   margin-left: 20px;
 }
+
+
+.row{
+  
+  height: 22px; 
+}
+.cell{
+  border: 1px solid #999;
+  width:20px; float: left;
+  height: 20px; vertical-align:middle; text-align: center;
+}

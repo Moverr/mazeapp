@@ -1,33 +1,48 @@
 import React, { Component } from 'react';
 import Square from './Square';
+import Row from './Row';
+import InputField from './InputField';
 
 class Board extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            numberOfColumns: 0,
+            numberOfRows: 0,
+            board: null
+        }
+    }
     renderSquare(i) {
         return <Square value={i} />;
     }
+    renderRow(numberOfRows, numberOfColumns) {
+        let x = numberOfRows
+        return Array.from({ length: x }, (v, k) => k + 1).map((number) => <Row id={number} columns={numberOfColumns} />);
+    }
+    initPlay(){
+     let result =    this.renderRow(this.state.numberOfRows, this.state.numberOfColumns);
+     this.setState({board:result})
+    }
+
 
     render() {
-        const status = 'Next player: X';
 
+const board = this.state.board;
         return (
             <div>
-                <div className="status">{status}</div>
-                <div className="board-row">
-                    {this.renderSquare(0)}
-                    {this.renderSquare(1)}
-                    {this.renderSquare(2)}
-                </div>
-                <div className="board-row">
-                    {this.renderSquare(3)}
-                    {this.renderSquare(4)}
-                    {this.renderSquare(5)}
-                </div>
-                <div className="board-row">
-                    {this.renderSquare(6)}
-                    {this.renderSquare(7)}
-                    {this.renderSquare(8)}
-                </div>
+                <h1>Play Game </h1>
+                Columns : &nbsp;
+                <InputField name={this.state.numberOfColumns} value={this.state.numberOfColumns} callback={(e) => this.setState({ numberOfColumns: e.target.value })} type="number" />
+            
+                <br />
+                <br />
+                Rows : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <InputField name={this.state.numberOfRows} value={this.state.numberOfRows} callback={(e) => this.setState({ numberOfRows: e.target.value })} type="number" />
+
+                <br />
+                <button onClick={() => this.initPlay()}>Play</button>
+                {board}
             </div>
         );
     }
