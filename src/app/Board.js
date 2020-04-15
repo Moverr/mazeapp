@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import Square from './Square';
+import React, { Component } from 'react'; 
 import Row from './Row';
 import InputField from './InputField';
 
@@ -13,9 +12,7 @@ class Board extends Component {
             board: null
         }
     }
-    renderSquare(i) {
-        return <Square value={i} />;
-    }
+    
     renderRow(numberOfRows, numberOfColumns) {
         let x = numberOfRows
         return Array.from({ length: x }, (v, k) => k + 1).map((number) => <Row id={number} columns={numberOfColumns} />);
@@ -23,6 +20,17 @@ class Board extends Component {
     initPlay() {
         let result = this.renderRow(this.state.numberOfRows, this.state.numberOfColumns);
         this.setState({ board: result })
+        //todo: place the perosno randomly :
+        
+        
+
+    }
+
+    getMiddleArray(rows,columns){
+        if(rows !== undefined && columns !== undefined){
+            return ((rows * columns) /2 ) -1;
+        }
+        return null
     }
 
 
