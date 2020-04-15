@@ -15,22 +15,33 @@ class Board extends Component {
     
     renderRow(numberOfRows, numberOfColumns) {
         let x = numberOfRows
-        return Array.from({ length: x }, (v, k) => k + 1).map((number) => <Row id={number} columns={numberOfColumns} />);
+        return Array.from({ length: x }, (v, k) => k + 1).map((number) => <Row key={number}  id={number} columns={numberOfColumns} />);
     }
     initPlay() {
+        let middleIndex = this.getMiddleArray(this.state.numberOfRows,this.state.numberOfColumns)
         let result = this.renderRow(this.state.numberOfRows, this.state.numberOfColumns);
         this.setState({ board: result })
         //todo: place the perosno randomly :
-        
-        
+     
 
     }
 
     getMiddleArray(rows,columns){
+        let result = 0;
         if(rows !== undefined && columns !== undefined){
-            return ((rows * columns) /2 ) -1;
+            result = Math.floor((rows * columns) /2 ) -1;
         }
-        return null
+        console.log(result);
+        return result
+    }
+
+    getAverageNumberOfPlayers(rows,columns){
+        let result = 0;
+        if(rows !== undefined && columns !== undefined){
+            result = Math.floor((rows + columns) /2 );
+        }
+        console.log(result);
+        return result
     }
 
 
