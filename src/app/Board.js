@@ -20,21 +20,21 @@ class Board extends Component {
         let x = numberOfRows
         return Array.from({ length: x }, (v, k) => k + 1).map((number) => <Row id={number} columns={numberOfColumns} />);
     }
-    initPlay(){
-     let result =    this.renderRow(this.state.numberOfRows, this.state.numberOfColumns);
-     this.setState({board:result})
+    initPlay() {
+        let result = this.renderRow(this.state.numberOfRows, this.state.numberOfColumns);
+        this.setState({ board: result })
     }
 
 
     render() {
 
-const board = this.state.board;
+        const board = this.state.board;
         return (
             <div>
                 <h1>Play Game </h1>
                 Columns : &nbsp;
                 <InputField name={this.state.numberOfColumns} value={this.state.numberOfColumns} callback={(e) => this.setState({ numberOfColumns: e.target.value })} type="number" />
-            
+
                 <br />
                 <br />
                 Rows : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
