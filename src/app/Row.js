@@ -11,20 +11,16 @@ const RandomGenerator = function (_columns, _playersPerRow, _randomArray) {
         let playersPerRow = _playersPerRow;
 
         let nextRandom = Math.floor(Math.random() * columns)
-
-
-        if (randomArray.includes(nextRandom)) {
-                return RandomGenerator(_columns, _playersPerRow, _randomArray);
+        if(randomArray.includes(nextRandom)) {
+                return RandomGenerator(columns,playersPerRow,randomArray)
+        } 
+        randomArray.push(nextRandom);
+        if(randomArray.length ==playersPerRow ){
+                return randomArray
         }
-        if (randomArray.length == playersPerRow) {
-                return randomArray;
-        } else {
-                randomArray.push(nextRandom);
-                return RandomGenerator(_columns, _playersPerRow, _randomArray);
-
-        }
-
-
+        console.log(randomArray);
+        return RandomGenerator(columns,playersPerRow,randomArray)
+ 
 
 }
 const Row = function (props) {
@@ -35,7 +31,8 @@ const Row = function (props) {
         let middleIndex = props.middleIndex;
 
         let playersPerRow = props.playersperrow;
-        let randomNumbers = this.RandomGenerator(columns, playersPerRow, new Array());
+        let x =[];
+        let randomNumbers = RandomGenerator(columns, playersPerRow, x);
 
 
         let numCells = rowId * columns;
@@ -49,7 +46,7 @@ const Row = function (props) {
 
         if (numCells > (middleIndex + 1) && ((middleIndex + 1) > numCells - columns)) {
                 middleCOunt = numCells % middleIndex;
-                if (middleCOunt == 0) middleCOunt = 1;
+                if (middleCOunt === 0) middleCOunt = 1;
                 console.log("Beautiful Woman  ::  " + middleCOunt);
         }
 
@@ -70,6 +67,13 @@ const Row = function (props) {
                         let classname = "cell";
                         if (middleCOunt == number) {
                                 classname = "cell RED"
+                        }
+
+                        if(randomNumbers.includes(number)){
+                                if(classname !== "cell RED"){
+                                        classname = "cell GREEN"
+                                }
+                              
                         }
                         let result = <Cell key={number} id={number} classname={classname} />;
                         return result;

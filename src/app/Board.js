@@ -20,7 +20,8 @@ class Board extends Component {
     }
     renderRow(numberOfRows, numberOfColumns, middleIndex,averageNumOfPlayers) {
         let rows = numberOfRows
-        let players_per_row = Math.floor(averageNumOfPlayers/rows);
+        let players_per_row = Math.floor(averageNumOfPlayers);
+        console.log("average per row "+averageNumOfPlayers);
         return Array.from({ length: rows }, (v, k) => k + 1).map((number) => {
           return  <Row key={number} id={number} columns={numberOfColumns} middleIndex={middleIndex} count={this.state.count} playersperrow = {players_per_row} callback={this.addup} />
 
@@ -52,7 +53,7 @@ class Board extends Component {
     getAverageNumberOfPlayers(rows, columns) {
         let result = 0;
         if (rows !== undefined && columns !== undefined) {
-            result = Math.floor((rows + columns) / 2);
+            result = Math.floor((rows ) / 2);
         }
         console.log(result);
         return result
