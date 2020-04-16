@@ -18,12 +18,16 @@ const RandomGenerator = function (_columns, _playersPerRow, _randomArray) {
         if(randomArray.length ==playersPerRow ){
                 return randomArray
         }
-        console.log(randomArray);
+        
         return RandomGenerator(columns,playersPerRow,randomArray)
  
 
 }
+
+
 const Row = function (props) {
+        let starpoints = [];
+        let greenPoints = [];
 
         let columns = props.columns;
         let count = props.count;
@@ -33,14 +37,12 @@ const Row = function (props) {
         let playersPerRow = props.playersperrow;
         let x =[];
         let randomNumbers = RandomGenerator(columns, playersPerRow, x);
-
+        greenPoints[rowId] = randomNumbers;
 
         let numCells = rowId * columns;
-        console.log("Middle Index ");
-        console.log(middleIndex);
+   
 
-        console.log("Columns ");
-        console.log(columns);
+       
 
         let middleCOunt = 0;
 
@@ -50,8 +52,7 @@ const Row = function (props) {
                 console.log("Beautiful Woman  ::  " + middleCOunt);
         }
 
-        console.log("numCells ");
-        console.log(numCells);
+      
 
 
 
@@ -59,18 +60,20 @@ const Row = function (props) {
 
 
 
-        return <div key={"row_" + props.id} className={'row'}  {...props.callback(count)} >
+        return <div key={"row_" + props.id} className={'row'}  {...props.callback(count,starpoints,greenPoints)} >
 
 
                 {Array.from({ length: columns }, (v, k) => k + 1).map((number) => {
 
                         let classname = "cell";
                         if (middleCOunt == number) {
+                                starpoints= [rowId,number];
                                 classname = "cell RED"
                         }
 
                         if(randomNumbers.includes(number)){
                                 if(classname !== "cell RED"){
+                                        greenPoints.push([rowId,number]);
                                         classname = "cell GREEN"
                                 }
                               

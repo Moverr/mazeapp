@@ -13,10 +13,13 @@ class Board extends Component {
             count: 0
         }
     }
-
-    addup(_count) {
-        console.log("------------------")
-        console.log(_count);
+      starpoints = [];
+      greenPoints = new Array();
+    addup(_count,_redPoints,_greenPoints) {
+        // this.greenPoints.push(_greenPoints);
+        // this.starpoints = redPoints;
+        console.log("--LLLLL----------------")
+        console.log(_greenPoints);
     }
     renderRow(numberOfRows, numberOfColumns, middleIndex,averageNumOfPlayers) {
         let rows = numberOfRows
