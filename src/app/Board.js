@@ -1,4 +1,4 @@
-import React, { Component } from 'react'; 
+import React, { Component } from 'react';
 import Row from './Row';
 import InputField from './InputField';
 
@@ -10,40 +10,49 @@ class Board extends Component {
             numberOfColumns: 0,
             numberOfRows: 0,
             board: null,
-            count:0
+            count: 0
         }
     }
-    
-    addup(_count){
+
+    addup(_count) {
         console.log("------------------")
-     console.log(_count);    
+        console.log(_count);
     }
-    renderRow(numberOfRows, numberOfColumns,middleIndex) {
-        let x = numberOfRows
-        return Array.from({ length: x }, (v, k) => k + 1).map((number) => <Row key={number}  id={number} columns={numberOfColumns} middleIndex ={middleIndex} count={this.state.count} callback={this.addup}/>);
+    renderRow(numberOfRows, numberOfColumns, middleIndex,averageNumOfPlayers) {
+        let rows = numberOfRows
+        let players_per_row = Math.floor(averageNumOfPlayers/rows);
+        return Array.from({ length: rows }, (v, k) => k + 1).map((number) => {
+          return  <Row key={number} id={number} columns={numberOfColumns} middleIndex={middleIndex} count={this.state.count} playersperrow = {players_per_row} callback={this.addup} />
+
+        }
+
+        );
     }
     initPlay() {
-        let middleIndex = this.getPossibleMiddleCell(this.state.numberOfRows,this.state.numberOfColumns)
-        let result = this.renderRow(this.state.numberOfRows, this.state.numberOfColumns,middleIndex);
+        let middleIndex = this.getPossibleMiddleCell(this.state.numberOfRows, this.state.numberOfColumns)
+        let averageNumOfPlayers = this.getAverageNumberOfPlayers(this.state.numberOfRows, this.state.numberOfColumns);
+        let result = this.renderRow(this.state.numberOfRows, this.state.numberOfColumns, middleIndex, averageNumOfPlayers);
         this.setState({ board: result })
         //todo: place the perosno randomly :
-     
+
 
     }
 
-    getPossibleMiddleCell(rows,columns){
-        let result = 0;
-        if(rows !== undefined && columns !== undefined){
-            result = Math.floor((rows * columns) /2 ) ;
+    getPossibleMiddleCell(rows, columns) {
+        let result = 1;
+        if (rows !== undefined && columns !== undefined) {
+            result = Math.floor((rows * columns) / 2);
         }
+        console.log("REALLY-----------------------------");
         console.log(result);
+       
         return result
     }
 
-    getAverageNumberOfPlayers(rows,columns){
+    getAverageNumberOfPlayers(rows, columns) {
         let result = 0;
-        if(rows !== undefined && columns !== undefined){
-            result = Math.floor((rows + columns) /2 );
+        if (rows !== undefined && columns !== undefined) {
+            result = Math.floor((rows + columns) / 2);
         }
         console.log(result);
         return result

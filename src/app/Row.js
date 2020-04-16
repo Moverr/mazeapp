@@ -4,15 +4,41 @@ import Cell from './Cell';
 //todo: cellcount : 
 //todo: cells * rows : 
 //todo: cell * 
+
+const RandomGenerator = function (_columns, _playersPerRow, _randomArray) {
+        let randomArray = _randomArray
+        let columns = _columns;
+        let playersPerRow = _playersPerRow;
+
+        let nextRandom = Math.floor(Math.random() * columns)
+
+
+        if (randomArray.includes(nextRandom)) {
+                return RandomGenerator(_columns, _playersPerRow, _randomArray);
+        }
+        if (randomArray.length == playersPerRow) {
+                return randomArray;
+        } else {
+                randomArray.push(nextRandom);
+                return RandomGenerator(_columns, _playersPerRow, _randomArray);
+
+        }
+
+
+
+}
 const Row = function (props) {
-         
+
         let columns = props.columns;
         let count = props.count;
         let rowId = props.id;
         let middleIndex = props.middleIndex;
 
-        
-        let numCells = rowId* columns;
+        let playersPerRow = props.playersperrow;
+        let randomNumbers = this.RandomGenerator(columns, playersPerRow, new Array());
+
+
+        let numCells = rowId * columns;
         console.log("Middle Index ");
         console.log(middleIndex);
 
@@ -21,30 +47,31 @@ const Row = function (props) {
 
         let middleCOunt = 0;
 
-        if(numCells > (middleIndex +1)  && ((middleIndex +1) > numCells- columns ) ){
-                middleCOunt =    numCells % middleIndex;
-                console.log("Beautiful Woman  ::  " + middleCOunt); 
+        if (numCells > (middleIndex + 1) && ((middleIndex + 1) > numCells - columns)) {
+                middleCOunt = numCells % middleIndex;
+                if (middleCOunt == 0) middleCOunt = 1;
+                console.log("Beautiful Woman  ::  " + middleCOunt);
         }
 
         console.log("numCells ");
         console.log(numCells);
 
-        
 
-        
-        
+
+
+
 
 
         return <div key={"row_" + props.id} className={'row'}  {...props.callback(count)} >
 
-                
+
                 {Array.from({ length: columns }, (v, k) => k + 1).map((number) => {
 
                         let classname = "cell";
-                        if(middleCOunt == number){
-                                classname ="cell RED"  
+                        if (middleCOunt == number) {
+                                classname = "cell RED"
                         }
-                      let result = <Cell key={number} id={number} classname={classname}  />;
+                        let result = <Cell key={number} id={number} classname={classname} />;
                         return result;
                 }
 
@@ -53,4 +80,4 @@ const Row = function (props) {
 }
 
 
-export  default Row;
+export default Row;
