@@ -13,20 +13,17 @@ class Board extends Component {
             count: 0
         }
     }
-      starpoints = [];
-      greenPoints = new Array();
-    addup(_count,_redPoints,_greenPoints) {
-        // this.greenPoints.push(_greenPoints);
-        // this.starpoints = redPoints;
-        console.log("--LLLLL----------------")
-        console.log(_greenPoints);
+    starpoints = [];
+    greenPoints = new Array();
+    addup(_count, _redPoints, _greenPoints) {
+
     }
-    renderRow(numberOfRows, numberOfColumns, middleIndex,averageNumOfPlayers) {
+    renderRow(numberOfRows, numberOfColumns, middleIndex, averageNumOfPlayers) {
         let rows = numberOfRows
         let players_per_row = Math.floor(averageNumOfPlayers);
-        console.log("average per row "+averageNumOfPlayers);
+
         return Array.from({ length: rows }, (v, k) => k + 1).map((number) => {
-          return  <Row key={number} id={number} columns={numberOfColumns} middleIndex={middleIndex} count={this.state.count} playersperrow = {players_per_row} callback={this.addup} />
+            return <Row key={number} id={number} columns={numberOfColumns} middleIndex={middleIndex} count={this.state.count} playersperrow={players_per_row} callback={this.addup} />
 
         }
 
@@ -49,14 +46,14 @@ class Board extends Component {
         }
         console.log("REALLY-----------------------------");
         console.log(result);
-       
+
         return result
     }
 
     getAverageNumberOfPlayers(rows, columns) {
         let result = 0;
         if (rows !== undefined && columns !== undefined) {
-            result = Math.floor((rows ) / 2);
+            result = Math.floor((rows) / 2);
         }
         console.log(result);
         return result

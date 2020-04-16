@@ -3,7 +3,8 @@ body {
   margin: 20px;
 }
 
-ol, ul {
+ol,
+ul {
   padding-left: 30px;
 }
 
@@ -49,27 +50,21 @@ ol, ul {
   margin-left: 20px;
 }
 
-
-.row{
-  
-  height: 22px; 
+.row {
+  height: 22px;
 }
-.cell{
+.cell {
   border: 1px solid #999;
-  width:20px; float: left;
-  height: 20px; vertical-align:middle; text-align: center;
+  width: 20px;
+  float: left;
+  height: 20px;
+  vertical-align: middle;
+  text-align: center;
 }
- .RED{
-  
+.RED {
   background: red;
-  
-
 }
 
-
-.GREEN{
-  
+.GREEN {
   background: green;
-  
-
 }
